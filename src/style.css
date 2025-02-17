@@ -43,20 +43,15 @@ img {
   border: 1px solid #ccc;
   position: relative;
   border-radius: 0.29rem;
-cursor: pointer;
+  cursor: pointer;
 
-    transition: transform 0.3s ease; 
-  }
-  
-  .card:hover {
-    transform: scale(1.05); 
-    border: 2px solid #1877f2;
-  }
-  
+  transition: transform 0.3s ease;
+}
 
-/* 
-.product-image {
-} */
+.card:hover {
+  transform: scale(1.05);
+  border: 2px solid #1877f2;
+}
 
 .product-title {
   position: absolute;
