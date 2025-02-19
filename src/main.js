@@ -1,42 +1,60 @@
 import axios from "axios";
+
 document.addEventListener("DOMContentLoaded", () => {
   const product_container = document.querySelector("#product_container");
-  const productPromise = axios.get(
-    "https://api.freeapi.app/api/v1/public/randomproducts?page=1&limit=10&inc=category%252Cprice%252Cthumbnail%252Cimages%252Ctitle%252Cid&query=mens-watches"
-  );
-  productPromise
+  const loader = document.querySelector("#loader"); // Select loader
+
+  // Show loader before fetching data
+  loader.style.display = "block";
+
+  axios
+    .get("https://api.freeapi.app/api/v1/public/randomproducts?")
     .then((feedback) => {
       const items = feedback.data.data.data;
-      // console.log(feedback);
-      items.map((product) => {
-        // console.log(product);
+
+      // Create an array to track image loading
+      let imagesLoaded = 0;
+
+      items.forEach((product) => {
         const card = document.createElement("div");
         card.classList.add("card");
+
         const cardImg = document.createElement("div");
-        //image fetched
+        cardImg.classList.add("img-container");
+
+        // Create image element
         const productImage = document.createElement("img");
         productImage.setAttribute("src", product.thumbnail);
-        cardImg.appendChild(productImage);
         productImage.classList.add("product-image");
-        // card.classList.add("card");
 
-        //fetched title
+        // Hide loader when all images are loaded
+        productImage.onload = () => {
+          imagesLoaded++;
+          if (imagesLoaded === items.length) {
+            loader.style.display = "none"; // Hide loader when all images are loaded
+          }
+        };
+
+        cardImg.appendChild(productImage);
+
         const cardDesc = document.createElement("div");
         const productTitle = document.createElement("h2");
         productTitle.textContent = product.title;
-        cardDesc.appendChild(productTitle);
         productTitle.classList.add("product-title");
-        //title
+        cardDesc.appendChild(productTitle);
+
         const productPrice = document.createElement("p");
-        productPrice.textContent = product.price;
+        productPrice.textContent = `$${product.price}`;
         productPrice.classList.add("product-price");
         cardDesc.appendChild(productPrice);
 
         card.appendChild(cardImg);
         card.appendChild(cardDesc);
-
         product_container.appendChild(card);
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      loader.style.display = "none"; // Hide loader if there's an error
+    });
 });
