@@ -2,10 +2,11 @@ import axios from "axios";
 
 document.addEventListener("DOMContentLoaded", () => {
   const product_container = document.querySelector("#product_container");
-  const loader = document.querySelector("#loader"); // Select loader
+  const spin = document.querySelector(".spin");
 
   // Show loader before fetching data
-  loader.style.display = "block";
+  spin.style.display = "block";
+  product_container.style.display = "none";
 
   axios
     .get("https://api.freeapi.app/api/v1/public/randomproducts?")
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const items = feedback.data.data.data;
 
       // Create an array to track image loading
-      let imagesLoaded = 0;
+      // let imagesLoaded = 0;
 
       items.forEach((product) => {
         const card = document.createElement("div");
@@ -28,12 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
         productImage.classList.add("product-image");
 
         // Hide loader when all images are loaded
-        productImage.onload = () => {
-          imagesLoaded++;
-          if (imagesLoaded === items.length) {
-            loader.style.display = "none"; // Hide loader when all images are loaded
-          }
-        };
+        // productImage.onload = () => {
+        //   imagesLoaded++;
+        //   if (imagesLoaded === items.length) {
+        //     loader.style.display = "none"; // Hide loader when all images are loaded
+        //     spin.style.display = "none";
+        //     product_container.style.display = "grid";
+        //   }
+        // };
 
         cardImg.appendChild(productImage);
 
@@ -44,17 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
         cardDesc.appendChild(productTitle);
 
         const productPrice = document.createElement("p");
-        productPrice.textContent = `$${product.price}`;
+        productPrice.textContent = `$${Number(product.price).toFixed(2)}`;
+
         productPrice.classList.add("product-price");
         cardDesc.appendChild(productPrice);
 
         card.appendChild(cardImg);
         card.appendChild(cardDesc);
         product_container.appendChild(card);
+
+        product_container.style.display = "grid";
+        spin.style.display = "none";
       });
     })
     .catch((err) => {
       console.log(err);
-      loader.style.display = "none"; // Hide loader if there's an error
+      spin.style.display = "none"; // Hide loader if there's an error
     });
 });
