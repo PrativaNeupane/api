@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((feedback) => {
       const items = feedback.data.data.data;
 
-      // Create an array to track image loading
-      // let imagesLoaded = 0;
+      
 
       items.forEach((product) => {
         const card = document.createElement("div");
@@ -28,15 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
         productImage.setAttribute("src", product.thumbnail);
         productImage.classList.add("product-image");
 
-        // Hide loader when all images are loaded
-        // productImage.onload = () => {
-        //   imagesLoaded++;
-        //   if (imagesLoaded === items.length) {
-        //     loader.style.display = "none"; // Hide loader when all images are loaded
-        //     spin.style.display = "none";
-        //     product_container.style.display = "grid";
-        //   }
-        // };
 
         cardImg.appendChild(productImage);
 
