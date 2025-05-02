@@ -9,12 +9,62 @@
       rel="stylesheet"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
     <div class="container--fluid">
+      <div class="spin">
+        <div id="loader"></div>
+      </div>
       <div id="product_container"></div>
     </div>
+
+    <footer>
+      <hr class="footer-divider" />
+      <div class="footer-container">
+        <div class="footer-column-left">
+          <div class="footer_image">
+            <img src="./public/asstes/projectlogo.jpg" alt="Logo" />
+            <h3>ACME STORE</h3>
+          </div>
+          <div class="footer-column">
+            <a href="#" class="footer-link"> Home</a>
+            <a href="#">About</a>
+            <a href="#">Terms and conditions</a>
+            <a href="#">Shipping & return policy</a>
+            <a href="#">FAQ</a>
+          </div>
+          </div>
+          <div class="footer-column-right">
+            <div class="triangle-button">
+              <button>
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <div class="vertical-line">
+                <h3>Deploy</h3>
+              </div>
+            </div>
+        </div>
+      </div>
+      <hr class="footer-bottom-divider" />
+      <div class="footer-bottom">
+        <div class="footer-info">
+          <p>© 2023 - 2025 ACME, Inc. All rights reserved.</p>
+          <div class="view-source">
+            <p>View the source</p>
+          </div>
+        </div>
+        
+        <button class="triangle-button-bottom">
+          Created by <i class="fa-solid fa-play"></i> vercel
+        </button>
+      </div>
+    </footer>
+
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
